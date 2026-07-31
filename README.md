@@ -20,6 +20,8 @@ npm install
 npm run dev
 ```
 
+Or use the live demo on [GitHub Pages](https://priyanka-cmd23.github.io/github-streak-dashboard/).
+
 ## How it works
 
 The app fetches `https://github.com/users/<username>/contributions` (the same endpoint GitHub's own profile page uses) and parses the contribution calendar cells. Streaks are computed from the sequence of days with any contribution.
