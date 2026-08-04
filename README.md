@@ -26,6 +26,10 @@ Or use the live demo on [GitHub Pages](https://priyanka-cmd23.github.io/github-s
 
 The app fetches `https://github.com/users/<username>/contributions` (the same endpoint GitHub's own profile page uses) and parses the contribution calendar cells. Streaks are computed from the sequence of days with any contribution.
 
+## Checking any user
+
+When the app loads, type any public GitHub username in the search box to pull their contribution streak immediately.
+
 ## Roadmap
 
 - [ ] Monthly/yearly filtering
