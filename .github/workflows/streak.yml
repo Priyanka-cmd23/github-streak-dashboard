@@ -1,0 +1,37 @@
+name: Daily Streak Commit
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+env:
+  GIT_AUTHOR_NAME: radhikasax22-sys
+  GIT_AUTHOR_EMAIL: radhikasax22@gmail.com
+  GIT_COMMITTER_NAME: radhikasax22-sys
+  GIT_COMMITTER_EMAIL: radhikasax22@gmail.com
+
+jobs:
+  streak:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Append daily entry
+        run: |
+          stamp="$(TZ=Etc/UTC date '+%Y-%m-%d %H:%M')"
+          echo "- $stamp : automated daily contribution" >> streak-log.md
+
+      - name: Commit and push
+        run: |
+          git config user.name  "${{ env.GIT_AUTHOR_NAME }}"
+          git config user.email "${{ env.GIT_AUTHOR_EMAIL }}"
+          git add streak-log.md
+          git diff --cached --quiet && echo "nothing to commit" || {
+            git commit -m "chore: automated daily contribution $stamp"
+            git push
+          }
