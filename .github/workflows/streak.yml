@@ -2,17 +2,17 @@ name: Daily Streak Commit
 
 on:
   schedule:
-    - cron: '0 0 * * *'
+    - cron: '0 0,8,16 * * *'
   workflow_dispatch:
 
 permissions:
   contents: write
 
 env:
-  GIT_AUTHOR_NAME: radhikasax22-sys
-  GIT_AUTHOR_EMAIL: radhikasax22@gmail.com
-  GIT_COMMITTER_NAME: radhikasax22-sys
-  GIT_COMMITTER_EMAIL: radhikasax22@gmail.com
+  GIT_AUTHOR_NAME: Priyanka-cmd23
+  GIT_AUTHOR_EMAIL: radhikasaxen22@gmail.com
+  GIT_COMMITTER_NAME: Priyanka-cmd23
+  GIT_COMMITTER_EMAIL: radhikasaxen22@gmail.com
 
 jobs:
   streak:
@@ -23,8 +23,11 @@ jobs:
 
       - name: Append daily entry
         run: |
+          today="$(TZ=Etc/UTC date '+%Y-%m-%d')"
           stamp="$(TZ=Etc/UTC date '+%Y-%m-%d %H:%M')"
-          echo "- $stamp : automated daily contribution" >> streak-log.md
+          if ! grep -qF "$today" streak-log.md; then
+            echo "- $stamp : automated daily contribution" >> streak-log.md
+          fi
 
       - name: Commit and push
         run: |
